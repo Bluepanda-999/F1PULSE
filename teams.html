@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>F1 Pulse — Team Grid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="custom.css">
+  <script src="js/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <style>
+:root {
+  --bg: #0a0a0a;
+  --text: #ffffff;
+  --card: #111213;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+.theme-light {
+  --bg: #ffffff;
+  --text: #000000;
+  --card: #f2f2f2;
+}
+</style>
+</head>
+<body>
+
+  <header class="bg-dark text-white py-3">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h1 class="logo mb-0">F1 PULSE</h1>
+    <nav class="d-flex align-items-center gap-3">
+      <a href="index.html" class="text-white">Home</a>
+      <a href="teams.html" class="text-white">Teams</a>
+      <a href="drivers.html" class="text-white">Drivers</a>
+      <a href="tracks.html" class="text-white">Tracks</a>
+      <a href="news.html" class="text-white">News</a>
+      <a href="shop.html" class="text-white">Shop</a>
+    <button id="themeToggle" class="btn btn-outline-light btn-sm ms-2" type="button" aria-label="Toggle theme">☀️</button>
+    </nav>
+  </div>
+</header>
+<style>
+:root{
+  --bg:#0a0a0a;           /* page */
+  --panel:#101112;        /* panels/cards */
+  --border:rgba(255,255,255,.10);
+  --text:#f5f5f5;
+  --muted:#bdbdbd;
+  --red:#e10600;
+  --radius:16px;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Roboto',system-ui,Segoe UI,Arial;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+
+/* ====== Header ====== */
+.wrap{max-width:1200px;margin:0 auto;padding:20px}
+.brand{display:flex;align-items:center;gap:14px;margin:10px 0 8px;font-family:'Orbitron',sans-serif;font-weight:800;color:var(--red);font-size:2rem;letter-spacing:.2px}
+.finish-line{width:46px;height:12px;border-radius:4px;background:repeating-linear-gradient(90deg,var(--red) 0 10px,#fff 10px 20px)}
+.subtitle{color:var(--muted);margin-bottom:14px}
+
+/* ====== Controls ====== */
+.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.search{
+  position:relative;flex:1 1 360px;min-width:260px
+}
+.search input{
+  width:100%;padding:12px 44px 12px 42px;border-radius:999px;
+  border:1px solid var(--border);outline:none;background:
+  linear-gradient(180deg,#18191a,#111213);
+  color:#fff;box-shadow:0 6px 18px rgba(225,6,0,.08) inset, 0 0 0 1px transparent;
+}
+.search input::placeholder{color:#9aa1a9}
+.search .ico{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:.9
+}
+.search .ico svg{width:18px;height:18px;display:block;fill:#cfd6de}
+
+/* custom dark dropdown (no OS white) */
+.dd{position:relative}
+.dd-btn{
+  background:linear-gradient(180deg,#1a1b1d,#0f1011);
+  border:1px solid var(--border); color:#e9edf2; padding:10px 40px 10px 14px;
+  border-radius:12px; cursor:pointer; font-weight:600; min-width:180px; text-align:left;
+}
+.dd-btn:after{
+  content:""; position:absolute; right:12px; top:50%; width:10px; height:10px; transform:translateY(-50%);
+  background:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat center/contain;
+  opacity:.9;
+}
+.dd-menu{
+  display:none; position:absolute; z-index:20; margin-top:6px; min-width:220px;
+  background:linear-gradient(180deg,#161718,#0e0f10);
+  border:1px solid var(--border); border-radius:14px; box-shadow:0 18px 42px rgba(0,0,0,.5);
+}
+.dd.open .dd-menu{display:block}
+.dd-item{padding:10px 12px; cursor:pointer; color:#dfe3e7}
+.dd-item:hover{background:#151618}
+.count{color:#cdd3da;opacity:.9}
+
+/* ====== Grid ====== */
+.grid{display:grid;gap:16px;margin-top:16px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.card{
+  border:1px solid var(--border); border-radius:var(--radius);
+  background:var(--panel); overflow:hidden; position:relative;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.card:hover{transform:translateY(-3px); box-shadow:0 16px 34px rgba(0,0,0,.6)}
+.card-head{
+  display:flex;align-items:center;justify-content:space-between;padding:12px 14px 10px
+}
+.card-left{display:flex;align-items:center;gap:10px}
+.dot{width:10px;height:10px;border-radius:50%}
+.name{font-family:'Orbitron',sans-serif;font-weight:800;letter-spacing:.3px}
+.tap{color:#cfd5dc; font-size:.92rem; opacity:.9}
+
+/* Car image – clean, no colored overlay; just a subtle vignette for readability */
+.car{
+  aspect-ratio:16/6; background:#0f0f0f center/cover no-repeat; position:relative; border-top:1px solid var(--border);
+}
+.car:after{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(120% 80% at 50% 100%, transparent 0 55%, rgba(0,0,0,.45) 85% 100%),
+             linear-gradient(180deg, rgba(0,0,0,.00), rgba(0,0,0,.25));
+  pointer-events:none;
+}
+.card-foot{padding:10px 14px;color:#cfd5dc}
+
+/* ==== Drawer & Modal reused (minor polish) ==== */
+.panel{position:fixed;left:0;right:0;bottom:-100%;background:linear-gradient(180deg,#111213,#0d0e0f);border-top:1px solid var(--border);transition:bottom .28s ease;z-index:50}
+.panel.show{bottom:0}
+.panel-wrap{max-width:1200px;margin:0 auto;padding:18px 20px 26px}
+.panel-top{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.title{font-family:'Orbitron',sans-serif;font-weight:800;letter-spacing:.3px;font-size:1.25rem}
+.banner{height:min(50vh,520px);background:center/contain no-repeat;border-radius:14px;margin-top:12px;border:1px solid var(--border)}
+.drivers{margin-top:14px;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.drv{display:grid;grid-template-columns:100px 1fr;gap:14px;padding:12px;border:1px solid var(--border);border-radius:14px;background:linear-gradient(180deg,#141516,#0f1011);cursor:pointer}
+.portrait{width:100px;height:100px;border-radius:12px;overflow:hidden}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:center}
+.no{font-family:'Orbitron',sans-serif;padding:2px 8px;border:1px solid var(--border);border-radius:999px}
+.flag{font-size:1.1rem;margin-left:6px}
+.meta{color:#c7d1d9;font-size:.95rem;margin-top:4px}
+.close{border:1px solid var(--border);background:#151617;color:#eee;padding:8px 12px;border-radius:12px;cursor:pointer}
+
+/* driver modal */
+.drv-modal{position:fixed;inset:0;background:#0009;display:none;place-items:center;z-index:100}
+.drv-modal.open{display:grid}
+.drv-lg{background:#111;border:1px solid var(--border);border-radius:18px;max-width:900px;width:95%;overflow:hidden;box-shadow:0 20px 80px #000c;position:relative}
+.drv-lg img{width:100%;max-height:70vh;object-fit:contain;background:#000}
+.drv-body{padding:18px}
+.drv-close{position:absolute;top:14px;right:14px;background:#0008;border:1px solid #fff3;border-radius:50%;color:#fff;width:38px;height:38px;cursor:pointer;font-size:18px}
+
+/* subtle team-colored focus ring on hover */
+.card[data-accent] { box-shadow:0 0 0 1px transparent }
+.card:hover{ box-shadow:0 16px 36px rgba(0,0,0,.55) }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand"><span class="finish-line"></span> F1 Team Grid</div>
+  <div class="subtitle">Tap a team to view its 2025 lineup and quick facts.</div>
+
+  <div class="controls">
+    <!-- Search -->
+    <div class="search">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 001.48-4.23 6.5 6.5 0 10-6.5 6.5c1.61 0 3.09-.59 4.23-1.48l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      </span>
+      <input id="q" placeholder="Search team or driver…">
+    </div>
+
+    <!-- Custom dropdown -->
+    <div class="dd" id="sortDD">
+      <button class="dd-btn" id="sortBtn">Sort: Default</button>
+      <div class="dd-menu">
+        <div class="dd-item" data-sort="default">Sort: Default</div>
+        <div class="dd-item" data-sort="az">Sort: Team A–Z</div>
+        <div class="dd-item" data-sort="za">Sort: Team Z–A</div>
+      </div>
+    </div>
+
+    <div class="count" id="count">0 / 0 teams</div>
+  </div>
+
+  <div id="grid" class="grid"></div>
+</div>
+
+<!-- Drawer -->
+<div id="panel" class="panel" aria-live="polite">
+  <div class="panel-wrap">
+    <div class="panel-top">
+      <div class="title" id="teamTitle"></div>
+      <button class="close" id="closePanel">Close</button>
+    </div>
+    <div id="teamBanner" class="banner"></div>
+    <div id="drivers" class="drivers"></div>
+  </div>
+</div>
+
+<!-- Driver modal -->
+<div id="drvModal" class="drv-modal">
+  <div class="drv-lg">
+    <button class="drv-close" id="drvClose">✕</button>
+    <img id="drvImg" alt="">
+    <div class="drv-body">
+      <h2 id="drvName" style="margin:0 0 4px"></h2>
+      <div id="drvMeta" class="meta"></div>
+      <p id="drvBio" style="margin-top:10px"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ========= DATA (same as your last message) ========= */
+const TEAMS = [
+  { id:'fer', name:'Ferrari', color:'#C00000',
+    car:'https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp',
+    drivers:[
+      {no:16,name:'Charles Leclerc',flag:'🇲🇨',country:'Monaco',imgSmall:'https://i.pinimg.com/736x/d9/05/38/d9053878b098f7cb6c7e8b4861a384ec.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/ferrari/chalec01/2025ferrarichalec01right.webp',bio:'Aggressive qualifier, multiple poles for Ferrari.'},
+      {no:38,name:'Lewis Hamilton',flag:'🇬🇧',country:'United Kingdom',imgSmall:'https://i.pinimg.com/1200x/64/89/88/648988c61450085b4b6217272a53a30c.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/ferrari/lewham01/2025ferrarilewham01right.webp',bio:'Seven-time world champion.'}
+    ]},
+  { id:'mer', name:'Mercedes', color:'#00A19B',
+    car:'https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp',
+    drivers:[
+      {no:63,name:'George Russell',flag:'🇬🇧',country:'United Kingdom',imgSmall:'https://i.pinimg.com/1200x/2c/a1/36/2ca136a7ea49317ba88eca18ae8c739b.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/mercedes/georus01/2025mercedesgeorus01right.webp',bio:'Pinpoint qualifying laps.'},
+      {no:7,name:'Kimi Antonelli',flag:'🇮🇹',country:'Italy',imgSmall:'https://i.pinimg.com/736x/db/8a/1c/db8a1c18e1d53eecf5a65e3de2470d2f.jpg',imgLarge:'https://media.formula1.com/image/upload/c_fill,w_720/q_auto/v1740000000/common/f1/2025/mercedes/andant01/2025mercedesandant01right.webp',bio:'Junior phenom with smooth style.'}
+    ]},
+  { id:'rbr', name:'Red Bull Racing', color:'#1E2A5A',
+    car:'https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp',
+    drivers:[
+      {no:1,name:'Max Verstappen',flag:'🇳🇱',country:'Netherlands',imgSmall:'https://i.pinimg.com/1200x/51/cb/48/51cb4839699bed0ea8afa9f771c2a345.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/redbullracing/maxver01/2025redbullracingmaxver01right.webp',bio:'Multiple-time world champion.'},
+      {no:22,name:'Yuki Tsunoda',flag:'🇯🇵',country:'Japan',imgSmall:'https://i.pinimg.com/736x/e7/52/4e/e7524ea95ec040f148412a1be120d50f.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/redbullracing/yuktsu01/2025redbullracingyuktsu01right.webp',bio:'Great team player'}
+    ]},
+  { id:'mcl', name:'McLaren', color:'#FF8700',
+    car:'https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp',
+    drivers:[
+      {no:4,name:'Lando Norris',flag:'🇬🇧',country:'United Kingdom',imgSmall:'https://i.pinimg.com/1200x/18/0b/6a/180b6ae17598385eb1f2a07777a77ce0.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/mclaren/lannor01/2025mclarenlannor01right.webp',bio:''},
+      {no:81,name:'Oscar Piastri',flag:'🇦🇺',country:'Australia',imgSmall:'https://i.pinimg.com/736x/a2/51/ef/a251ef15db8c3d9ae425b5b999e1fc26.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/mclaren/oscpia01/2025mclarenoscpia01right.webp',bio:'Clinical racecraft and tyre management.'}
+    ]},
+  { id:'ast', name:'Aston Martin', color:'#006F62',
+    car:'https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp',
+    drivers:[
+      {no:14,name:'Fernando Alonso',flag:'🇪🇸',country:'Spain',imgSmall:'https://i.pinimg.com/736x/52/a6/41/52a641a43166cfa98c78be69684b8d69.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/astonmartin/feralo01/2025astonmartinferalo01right.webp',bio:'Legendary race IQ.'},
+      {no:18,name:'Lance Stroll',flag:'🇨🇦',country:'Canada',imgSmall:'https://i.pinimg.com/1200x/c3/5e/2f/c35e2f5a3da79e35ca0a872ba151d3de.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/astonmartin/lanstr01/2025astonmartinlanstr01right.webp',bio:'Strong starter and aggressive racer.'}
+    ]},
+  { id:'alp', name:'Alpine', color:'#2A64FF',
+    car:'https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp',
+    drivers:[
+      {no:10,name:'Pierre Gasly',flag:'🇫🇷',country:'France',imgSmall:'https://i.pinimg.com/1200x/b7/10/4a/b7104a6e289b3b5646d1b694ea9e0d49.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/alpine/piegas01/2025alpinepiegas01right.webp',bio:'Strong under pressure.'},
+      {no:31,name:'Franco Colapinto',flag:'🇦🇷',country:'Argentina',imgSmall:'https://i.pinimg.com/736x/68/69/3d/68693dcbfc579414f9aa110c9733d53b.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/alpine/fracol01/2025alpinefracol01right.webp',bio:'Rising star; consistent performer.'}
+    ]},
+  { id:'wms', name:'Williams', color:'#2A64FF',
+    car:'https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/common/f1/2025/williams/2025williamscarright.webp',
+    drivers:[
+      {no:23,name:'Alex Albon',flag:'🇹🇭',country:'Thailand',imgSmall:'https://i.pinimg.com/1200x/28/4c/a8/284ca833a2d8a6b2da70b7a5624f861d.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/williams/alealb01/2025williamsalealb01right.webp',bio:'Aggressive overtaker.'},
+      {no:55,name:'Carlos Sainz',flag:'🇪🇸',country:'Spain',imgSmall:'https://i.pinimg.com/736x/1c/07/49/1c0749ad71d9f912d0f9396c6ec3f5c9.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/williams/carsai01/2025williamscarsai01right.webp',bio:'Multiple race winner; strategic driver.'}
+    ]},
+  { id:'haas', name:'Haas', color:'#9A9A9A',
+    car:'https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/common/f1/2025/haasf1team/2025haasf1teamcarright.webp',
+    drivers:[
+      {no:31,name:'Esteban Ocon',flag:'🇫🇷',country:'France',imgSmall:'https://i.pinimg.com/736x/03/a1/a1/03a1a1e842c76990ea4f11b612cac193.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/haas/estoco01/2025haasestoco01right.webp',bio:'Fearless on lap one.'},
+      {no:87,name:'Oliver Bearman',flag:'🇬🇧',country:'United Kingdom',imgSmall:'https://i.pinimg.com/736x/02/08/e9/0208e9f1f70248040c745775c63e684f.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/haas/olibea01/2025haasolibea01right.webp',bio:'Young gun with great pace.'}
+    ]},
+  { id:'rb', name:'Racing Bulls', color:'#2442FF',
+    car:'https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp',
+    drivers:[
+      {no:6,name:'Isack Hadjar',flag:'🇫🇷',country:'France',imgSmall:'https://i.pinimg.com/736x/91/99/51/91995154385797732801e76c6ee72351.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/racingbulls/isahad01/2025racingbullsisahad01right.webp',bio:'Explosive speed and improving consistency.'},
+      {no:30,name:'Liam Lawson',flag:'🇳🇿',country:'New Zealand',imgSmall:'https://i.pinimg.com/736x/be/b2/75/beb27524bc311f98e0cf9aba39874dfa.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/racingbulls/lialaw01/2025racingbullslialaw01right.webp',bio:'Calm, precise, fast.'}
+    ]},
+  { id:'sau', name:'Sauber', color:'#00E08A',
+    car:'https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp',
+    drivers:[
+      {no:5,name:'Gabriel Bortoleto',flag:'🇧🇷',country:'Brazil',imgSmall:'https://i.pinimg.com/1200x/91/45/f1/9145f121b0241c9add63b83436828da4.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/kicksauber/gabbor01/2025kicksaubergabbor01right.webp',bio:'Strong in long stints.'},
+      {no:27,name:'Nico Hülkenberg',flag:'🇩🇪',country:'Germany',imgSmall:'https://i.pinimg.com/1200x/c9/6a/08/c96a085602f35a99ffd8858ce4d2201e.jpg',imgLarge:'https://media.formula1.com/image/upload/c_lfill,w_720/q_auto/v1740000000/common/f1/2025/kicksauber/nichul01/2025kicksaubernichul01right.webp',bio:'Veteran with excellent feedback.'}
+    ]}
+];
+
+/* ===== RENDER ===== */
+const grid = document.getElementById('grid');
+const q = document.getElementById('q');
+const count = document.getElementById('count');
+let sortMode = 'default';
+
+function getFiltered(){
+  const term = (q.value||'').trim().toLowerCase();
+  let list = TEAMS.map(t=>({
+    ...t,
+    dnames: t.drivers.map(d=>d.name.toLowerCase()).join(' | ')
+  }));
+  if(term){
+    list = list.filter(t =>
+      t.name.toLowerCase().includes(term) ||
+      t.dnames.includes(term)
+    );
+  }
+  if(sortMode==='az') list.sort((a,b)=>a.name.localeCompare(b.name));
+  if(sortMode==='za') list.sort((a,b)=>b.name.localeCompare(a.name));
+  return list;
+}
+
+function render(){
+  const teams = getFiltered();
+  count.textContent = `${teams.length} / ${TEAMS.length} teams`;
+  grid.innerHTML = '';
+  teams.forEach(t=>{
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.dataset.accent = t.color;
+    card.innerHTML = `
+      <div class="card-head">
+        <div class="card-left">
+          <span class="dot" style="background:${t.color}"></span>
+          <div class="name">${t.name}</div>
+        </div>
+        <div class="tap">Tap to view</div>
+      </div>
+      <div class="car" style="background-image:url('${t.car}')"></div>
+      <div class="card-foot">Tap to view drivers</div>
+    `;
+    card.onclick = ()=>openTeam(t);
+    grid.appendChild(card);
+  });
+}
+q.addEventListener('input', render);
+
+/* ===== custom dropdown logic ===== */
+const dd = document.getElementById('sortDD');
+const sortBtn = document.getElementById('sortBtn');
+dd.querySelectorAll('.dd-item').forEach(i=>{
+  i.addEventListener('click', ()=>{
+    sortMode = i.dataset.sort;
+    sortBtn.textContent = i.textContent;
+    dd.classList.remove('open');
+    render();
+  });
+});
+sortBtn.addEventListener('click', ()=>dd.classList.toggle('open'));
+document.addEventListener('click', (e)=>{ if(!dd.contains(e.target)) dd.classList.remove('open');});
+
+/* ===== Drawer & Modal ===== */
+const panel = document.getElementById('panel');
+const teamTitle = document.getElementById('teamTitle');
+const teamBanner = document.getElementById('teamBanner');
+const driversWrap = document.getElementById('drivers');
+document.getElementById('closePanel').onclick = ()=>panel.classList.remove('show');
+
+function openTeam(team){
+  teamTitle.textContent = team.name;
+  teamBanner.style.backgroundImage = `url('${team.car}')`;
+  driversWrap.innerHTML = '';
+  team.drivers.forEach(d=>{
+    const el = document.createElement('div');
+    el.className = 'drv';
+    el.innerHTML = `
+      <div class="portrait"><img src="${d.imgSmall||d.imgLarge}" alt="${d.name}"></div>
+      <div>
+        <div><span class="no">#${d.no}</span> <b>${d.name}</b> <span class="flag">${d.flag}</span></div>
+        <div class="meta">${d.country}</div>
+        <div class="meta" style="opacity:.9">${d.bio||''}</div>
+      </div>`;
+    el.onclick = ()=>openDriver(d, team);
+    driversWrap.appendChild(el);
+  });
+  panel.classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* driver modal */
+const m = document.getElementById('drvModal');
+function openDriver(d, team){
+  document.getElementById('drvImg').src = d.imgLarge||d.imgSmall;
+  document.getElementById('drvName').textContent = d.name;
+  document.getElementById('drvMeta').textContent = `${d.country} • ${team.name}`;
+  document.getElementById('drvBio').textContent = d.bio||'';
+  m.classList.add('open');
+}
+document.getElementById('drvClose').onclick = ()=>m.classList.remove('open');
+m.addEventListener('click',e=>{ if(e.target===m) m.classList.remove('open'); });
+
+/* init */
+render();
+</script>
+</body>
+</html>
+
+

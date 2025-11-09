@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>F1 Pulse — News</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="custom.css">
+  <script src="js/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+:root {
+  --bg: #0a0a0a;
+  --text: #ffffff;
+  --card: #111213;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+.theme-light {
+  --bg: #ffffff;
+  --text: #000000;
+  --card: #f2f2f2;
+}
+</style>
+</head>
+<body>
+
+  <header class="bg-dark text-white py-3">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h1 class="logo mb-0">F1 PULSE</h1>
+    <nav class="d-flex align-items-center gap-3">
+      <a href="index.html" class="text-white">Home</a>
+      <a href="teams.html" class="text-white">Teams</a>
+      <a href="drivers.html" class="text-white">Drivers</a>
+      <a href="tracks.html" class="text-white">Tracks</a>
+      <a href="news.html" class="text-white">News</a>
+      <a href="shop.html" class="text-white">Shop</a>
+    <button id="themeToggle" class="btn btn-outline-light btn-sm ms-2" type="button" aria-label="Toggle theme">☀️</button>
+    </nav>
+  </div>
+</header>
+
+<section id="trending" class="trending">
+    <h2 class="font-orbitron">🔥 Trending now</h2>
+    <div class="trending-list" id="trendingList"></div>
+</section>
+
+<section id="race-countdown" class="race-countdown">
+    <h2 class="font-orbitron">⏱ Next race</h2>
+    <div class="rc-when" id="rcWhen">—</div>
+    <div class="rc-timer" id="rcTimer">
+        <div><span id="rcD">0</span><label>days</label></div>
+        <div><span id="rcH">00</span><label>hours</label></div>
+        <div><span id="rcM">00</span><label>mins</label></div>
+        <div><span id="rcS">00</span><label>secs</label></div>
+    </div>
+    <div class="rc-note">Local time</div>
+</section>
+
+<article>
+    <img src="img/123.jpg" alt="Headline news" height="400" width="1590">
+    <h1 class="font-orbitron">FIA: Liam Lawson not at fault in incident with marshals</h1>
+    <article class="news-article">
+        <h3 class="font-orbitron section-title">FIA: Lawson cleared after Mexico incident</h3>
+        <div class="divider"></div>
+
+        <p class="lead"><em>Summary:</em> During the race in Mexico City, <strong>Liam Lawson</strong> narrowly avoided track marshals who crossed the circuit. The <strong>FIA</strong> opened an investigation, while the <strong>Automobile Club of Mexico (OMDAI Sport Mexico)</strong> initially accused the <strong>Racing Bulls</strong> driver of causing a dangerous situation.</p>
+
+        <ul class="key-points">
+            <li>The <strong>FIA</strong> issued an evening statement responding to the Mexican club.</li>
+            <li>Initial findings indicate <strong>Liam Lawson was not at fault</strong>.</li>
+            <li>Telemetry shows <strong>car No. 30</strong> slowed appropriately under <strong>double yellow flags</strong>.</li>
+            <li>A full, transparent review with <strong>OMDAI</strong> and <strong>Racing Bulls</strong> is ongoing.</li>
+        </ul>
+
+        <blockquote class="fancy-quote">
+            <p>“The investigation is ongoing, and we recognize that any situation in which marshals find themselves on the track in front of oncoming cars is not something we ever want to see. Naturally, this incident has raised concerns and sparked many discussions,” the FIA statement said. “Fortunately, it did not lead to serious consequences. However, we are conducting an internal review to fully understand what happened and identify areas where procedures can be improved.</p>
+            <p>We are working openly and transparently with <strong>OMDAI</strong> and the <strong>Racing Bulls</strong> team, with the shared goal of continuously improving the safety of our sport.</p>
+            <p>As with all serious incidents, a complete analysis will take some time, as it involves collecting and reviewing all available evidence, including multilingual radio communications between various parties and synchronizing all this diverse data. The results will be published once the investigation is concluded.</p>
+            <p>Having analyzed the telemetry from the incident, we can confirm that <strong>car No. 30, driven by Liam Lawson</strong>, reduced speed appropriately and responded correctly to the double yellow flags in that sector, braking earlier than on other laps and passing the first corner at a significantly lower speed than racing pace.</p>
+            <p><strong>He was not at fault in this incident.</strong></p>
+            <p>Finally, we would like to express our sincere gratitude to all the volunteers and marshals for their professionalism and dedication. Without them, our sport would not be safe.”</p>
+        </blockquote>
+
+        <p class="bottom-line"><strong>Bottom line:</strong> FIA’s preliminary assessment clears <strong>Liam Lawson</strong>, with a full report to follow after the investigation concludes.</p>
+    </article>
+
+    <div style="text-align:center; margin:20px 0;">
+        <a href="#more-news" class="more-news-btn close-btn">More news ↓</a>
+    </div>
+
+
+    <h1 class="font-orbitron">Table of Important Information</h1>
+
+<section id="f1-stats" class="f1-stats">
+    <div class="f1-tabs" role="tablist" aria-label="F1 stats">
+        <button class="f1-tab-btn is-active" role="tab" aria-selected="true" aria-controls="tab-points" id="tab-btn-points">Points</button>
+        <button class="f1-tab-btn" role="tab" aria-selected="false" aria-controls="tab-results" id="tab-btn-results">Last results</button>
+        <button class="f1-tab-btn" role="tab" aria-selected="false" aria-controls="tab-upcoming" id="tab-btn-upcoming">Upcoming</button>
+    </div>
+
+    <!-- Points -->
+    <div id="tab-points" class="f1-tab-panel is-active" role="tabpanel" aria-labelledby="tab-btn-points">
+        <div class="f1-two-col">
+            <div>
+                <h3 class="f1-h">Drivers’ Championship</h3>
+                <table class="f1-table font-orbitron">
+                    <thead><tr><th>#</th><th>Driver</th><th>Pts</th></tr></thead>
+                    <tbody id="drivers-body"></tbody>
+                </table>
+            </div>
+            <div>
+                <h3 class="f1-h">Constructors’ Championship</h3>
+                <table class="f1-table font-orbitron">
+                    <thead><tr><th>#</th><th>Team</th><th>Pts</th></tr></thead>
+                    <tbody id="teams-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Last results -->
+    <div id="tab-results" class="f1-tab-panel" role="tabpanel" aria-labelledby="tab-btn-results">
+        <table class="f1-table font-orbitron">
+            <thead>
+            <tr><th>Date & time</th><th>Round / Location</th><th>Session</th></tr>
+            </thead>
+            <tbody id="results-body"></tbody>
+        </table>
+    </div>
+
+    <!-- Upcoming -->
+    <div id="tab-upcoming" class="f1-tab-panel" role="tabpanel" aria-labelledby="tab-btn-upcoming">
+        <table class="f1-table font-orbitron">
+            <thead>
+            <tr><th>Date & time</th><th>Round / Location</th><th>Session</th></tr>
+            </thead>
+            <tbody id="upcoming-body"></tbody>
+        </table>
+    </div>
+    <section id="fan-comments" class="fan-comments">
+        <h2 class="font-orbitron">💬 Fan comments</h2>
+        <p class="fc-sub">Share your opinion about the latest race or news:</p>
+
+        <form id="commentForm" class="fc-form">
+            <input type="text" id="userName" placeholder="Your name" required>
+            <textarea id="userComment" placeholder="Write your comment..." required></textarea>
+            <button type="submit" class="fc-btn">Post</button>
+        </form>
+
+        <div id="commentList" class="fc-list"></div>
+    </section>
+
+</section>
+    <div class="news-search">
+        <input type="search" id="newsSearch" placeholder="Search news by title…" autocomplete="off">
+        <button id="newsClear" type="button" aria-label="Clear">×</button>
+    </div>
+
+<h1 class="font-orbitron" id="more-news">Other news</h1>
+
+<div class="drivers-list" id="newsList"></div>
+
+<dialog id="card" class="modal-content foot">
+    <div class="finish-line-strip"></div>
+    <div class="modal-inner">
+        <div class="classified-stamp">TOP SECRET</div>
+        <h2 id="dlgTitle" class="font-orbitron modal-title"></h2>
+        <div id="dlgContent" class="modal-body">Loading…</div>
+        <div class="modal-actions">
+            <button id="closeBtn" class="close-btn" type="button">Close</button>
+        </div>
+    </div>
+</dialog>
+    <script>
+        const data = [
+          { title:"Leo Turrini: Let there be two champions in 2008", file:"news/1.html", time:"00:48" },
+          { title:"Valtteri Bottas: Important to avoid excessive expectations", file:"news/2.html", time:"11/01" },
+          { title:"Formula E: Chloe Chambers fastest at women's test", file:"news/3.html", time:"11/01" },
+          { title:"Pat Symonds: Cadillac chassis #00 is almost ready", file:"news/4.html", time:"11/01" }
+        ];
+
+        function openModal(n){
+          const dlg = document.getElementById('card');
+          const t = document.getElementById('dlgTitle');
+          const c = document.getElementById('dlgContent');
+          t.textContent = n.title;
+          c.textContent = 'Loading…';
+          fetch(n.file).then(r=>r.text()).then(html=>{
+            c.innerHTML = html;
+            dlg.showModal();
+          }).catch(()=>{
+            c.textContent = 'Failed to load the article.';
+            dlg.showModal();
+          });
+        }
+
+        function renderList(items){
+          const list = document.getElementById('newsList');
+          list.innerHTML = '';
+          items.forEach(n=>{
+            const card = document.createElement('div');
+            card.className = 'driver-card';
+            card.innerHTML = `<span class="driver-fullname">${n.title}</span>`;
+            card.addEventListener('click', e=>{ e.preventDefault(); openModal(n); });
+            list.appendChild(card);
+          });
+          if(!list.children.length){
+            const empty = document.createElement('div');
+            empty.className = 'driver-card';
+            empty.innerHTML = `<span class="driver-fullname">No results</span>`;
+            list.appendChild(empty);
+          }
+        }
+        renderList(data);
+
+        const dlg = document.getElementById('card');
+        document.getElementById('closeBtn').addEventListener('click', ()=> dlg.close());
+        document.addEventListener('keydown', e => { if(e.key === 'Escape') dlg.close(); });
+
+        const demoDrivers = [
+          {pos:1, name:'Lando Norris', pts:357},
+          {pos:2, name:'Oscar Piastri', pts:356},
+          {pos:3, name:'Max Verstappen', pts:321},
+          {pos:4, name:'George Russell', pts:258},
+          {pos:5, name:'Charles Leclerc', pts:210},
+          {pos:6, name:'Lewis Hamilton', pts:146},
+          {pos:7, name:'Andrea Kimi Antonelli', pts:97},
+          {pos:8, name:'Alex Albon', pts:73},
+          {pos:9, name:'Nico Hülkenberg', pts:41},
+          {pos:10, name:'Isack Hadjar', pts:39},
+        ];
+        const demoTeams = [
+          {pos:1, name:'McLaren', pts:713},
+          {pos:2, name:'Scuderia Ferrari', pts:356},
+          {pos:3, name:'Mercedes AMG F1', pts:355},
+          {pos:4, name:'Red Bull', pts:346},
+          {pos:5, name:'Williams', pts:111},
+          {pos:6, name:'Racing Bulls', pts:72},
+          {pos:7, name:'Aston Martin', pts:69},
+          {pos:8, name:'Haas', pts:62},
+          {pos:9, name:'Kick Sauber', pts:60},
+          {pos:10, name:'Alpine', pts:20},
+        ];
+        const demoResults = [
+          {dt:'26.10.2025 23:00', round:'R20 · Mexico City, Mexico', session:'Grand Prix · Race (71 laps, 305.354 km)'},
+          {dt:'26.10.2025 00:00', round:'R20 · Mexico City, Mexico', session:'Grand Prix · Qualifying'},
+          {dt:'25.10.2025 20:30', round:'R20 · Mexico City, Mexico', session:'Free Practice 3'},
+          {dt:'25.10.2025 01:00', round:'R20 · Mexico City, Mexico', session:'Free Practice 2'},
+          {dt:'24.10.2025 21:30', round:'R20 · Mexico City, Mexico', session:'Free Practice 1'},
+          {dt:'19.10.2025 22:00', round:'R19 · Austin, USA', session:'Grand Prix · Race (56 laps, 308.405 km)'},
+          {dt:'19.10.2025 00:00', round:'R19 · Austin, USA', session:'Qualifying'},
+          {dt:'18.10.2025 20:00', round:'R19 · Austin, USA', session:'Sprint'},
+          {dt:'18.10.2025 00:30', round:'R19 · Austin, USA', session:'Sprint Shootout'},
+          {dt:'17.10.2025 20:30', round:'R19 · Austin, USA', session:'Free Practice 1'},
+        ];
+        const demoUpcoming = [
+          {dt:'07.11.2025 17:30', round:'R21 · São Paulo, Brazil', session:'Free Practice 1'},
+          {dt:'07.11.2025 21:30', round:'R21 · São Paulo, Brazil', session:'Sprint Shootout'},
+          {dt:'08.11.2025 17:00', round:'R21 · São Paulo, Brazil', session:'Sprint'},
+          {dt:'08.11.2025 21:00', round:'R21 · São Paulo, Brazil', session:'Qualifying'},
+          {dt:'09.11.2025 20:00', round:'R21 · São Paulo, Brazil', session:'Grand Prix · Race (71 laps, 305.879 km)'},
+          {dt:'21.11.2025 03:30', round:'R22 · Las Vegas, USA', session:'Free Practice 1'},
+          {dt:'21.11.2025 07:00', round:'R22 · Las Vegas, USA', session:'Free Practice 2'},
+          {dt:'22.11.2025 03:30', round:'R22 · Las Vegas, USA', session:'Free Practice 3'},
+          {dt:'22.11.2025 07:00', round:'R22 · Las Vegas, USA', session:'Qualifying'},
+          {dt:'23.11.2025 07:00', round:'R22 · Las Vegas, USA', session:'Grand Prix · Race (50 laps, 309.958 km)'},
+        ];
+
+        function renderTableRows(targetId, rows, cols){
+          const tb = document.getElementById(targetId);
+          tb.innerHTML = rows.map(r => `<tr>${cols.map(c => `<td>${r[c]}</td>`).join('')}</tr>`).join('');
+        }
+        renderTableRows('drivers-body', demoDrivers, ['pos','name','pts']);
+        renderTableRows('teams-body',   demoTeams,   ['pos','name','pts']);
+        renderTableRows('results-body', demoResults, ['dt','round','session']);
+        renderTableRows('upcoming-body', demoUpcoming, ['dt','round','session']);
+
+        const tabBtns = Array.from(document.querySelectorAll('.f1-tab-btn'));
+        const tabPanels = Array.from(document.querySelectorAll('.f1-tab-panel'));
+        tabBtns.forEach(btn=>{
+          btn.addEventListener('click', ()=>{
+            tabBtns.forEach(b=>{ b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+            tabPanels.forEach(p=>p.classList.remove('is-active'));
+            btn.classList.add('is-active');
+            btn.setAttribute('aria-selected','true');
+            document.getElementById(btn.getAttribute('aria-controls')).classList.add('is-active');
+          });
+        });
+
+        document.querySelectorAll('.main-nav .nav-link[data-tab]').forEach(a=>{
+          a.addEventListener('click', ()=>{
+            const id = a.dataset.tab;
+            const btn = document.querySelector(`.f1-tab-btn[aria-controls="${id}"]`);
+            if(btn){ btn.click(); }
+          });
+        });
+
+        document.querySelectorAll('a[href="#more-news"]').forEach(link=>{
+          link.addEventListener('click', e=>{
+            e.preventDefault();
+            const t = document.getElementById('more-news');
+            if (t && t.scrollIntoView) t.scrollIntoView({behavior:'smooth', block:'start'});
+            else window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'});
+          });
+        });
+
+        const norm = s => s.normalize('NFD').replace(/\p{Diacritic}/gu,'').toLowerCase();
+        function filterAndRender(query=''){
+          const q = norm(query.trim());
+          if (!q) { renderList(data); return; }
+          const filtered = data.filter(n => norm(n.title).includes(q));
+          const list = document.getElementById('newsList');
+          list.innerHTML = '';
+          filtered.forEach(n=>{
+            const t = n.title;
+            const tn = norm(t);
+            const i = tn.indexOf(q);
+            let shown = t;
+            if (i >= 0) shown = t.slice(0,i)+'<mark>'+t.slice(i,i+q.length)+'</mark>'+t.slice(i+q.length);
+            const card = document.createElement('div');
+            card.className = 'driver-card';
+            card.innerHTML = `<span class="driver-fullname">${shown}</span>`;
+            card.addEventListener('click', e=>{ e.preventDefault(); openModal(n); });
+            list.appendChild(card);
+          });
+          if (!list.children.length){
+            const empty = document.createElement('div');
+            empty.className = 'driver-card';
+            empty.innerHTML = `<span class="driver-fullname">No results</span>`;
+            list.appendChild(empty);
+          }
+        }
+
+        Array.from(document.querySelectorAll('#newsSearch')).forEach(inp=>{
+          let timer;
+          inp.addEventListener('input', ()=>{
+            clearTimeout(timer);
+            timer = setTimeout(()=> filterAndRender(inp.value), 120);
+          });
+          inp.addEventListener('focus', ()=>{
+            const t = document.getElementById('more-news');
+            if (t) t.scrollIntoView({behavior:'smooth', block:'start'});
+          });
+        });
+        const clearBtn = document.getElementById('newsClear');
+        if (clearBtn){
+          clearBtn.addEventListener('click', ()=>{
+            const inputs = Array.from(document.querySelectorAll('#newsSearch'));
+            inputs.forEach(i=> i.value = '');
+            renderList(data);
+            inputs[0]?.focus();
+          });
+        }
+
+        const hotNews = [
+  data[0], data[1], data[2], data[3]  // можешь заменить на любые элементы массива data
+];
+
+// 2) отрисовка карточек
+(function renderTrending(){
+  const box = document.getElementById('trendingList');
+  if (!box) return;
+  box.innerHTML = '';
+  hotNews.forEach(n=>{
+    const card = document.createElement('article');
+    card.className = 'trending-card';
+    card.innerHTML = `
+      <div class="hot-badge">HOT</div>
+      <div class="trending-title">${n.title}</div>
+      <div class="trending-meta">${n.time || ''}</div>
+    `;
+    card.addEventListener('click', e=>{ e.preventDefault(); openModal(n); });
+    box.appendChild(card);
+  });
+})();
+
+// 3) автопрокрутка (паузится при наведении)
+(function autoScrollTrending(){
+  const list = document.getElementById('trendingList');
+  if (!list) return;
+  let pause = false;
+  list.addEventListener('mouseenter', ()=> pause = true);
+  list.addEventListener('mouseleave', ()=> pause = false);
+  setInterval(()=>{
+    if (pause) return;
+    const nearEnd = list.scrollLeft + list.clientWidth >= list.scrollWidth - 10;
+    if (nearEnd) list.scrollTo({left:0, behavior:'smooth'});
+    else list.scrollBy({left: Math.max(220, list.clientWidth * 0.9), behavior:'smooth'});
+  }, 4000);
+})();
+
+        function parseDDMMYYYY_HHMM(s){
+  const m = s.match(/^(\d{2})\.(\d{2})\.(\d{4})\s+(\d{2}):(\d{2})$/);
+  if(!m) return null;
+  const [_, dd, mm, yyyy, HH, MM] = m.map(Number);
+  return new Date(yyyy, mm-1, dd, HH, MM, 0, 0);
+}
+
+// Берём ближайшее событие из demoUpcoming (если есть)
+function nextEventFromUpcoming(){
+  if (!Array.isArray(window.demoUpcoming)) return null;
+  const now = new Date();
+  const future = window.demoUpcoming
+    .map(x => ({...x, date: parseDDMMYYYY_HHMM(x.dt)}))
+    .filter(x => x.date && x.date.getTime() > now.getTime())
+    .sort((a,b) => a.date - b.date);
+  return future[0] || null;
+}
+
+// Инициализация цели
+let targetInfo = nextEventFromUpcoming();
+if (!targetInfo){
+  // запасной вариант, если demoUpcoming ещё не подключён
+  targetInfo = {
+    round: 'Next Grand Prix',
+    session: 'Race',
+    date: new Date(new Date().getTime() + 5*24*60*60*1000 + 3*60*60*1000) // +5 дней 3 часа
+  };
+}
+
+const rcWhen = document.getElementById('rcWhen');
+const rcD = document.getElementById('rcD');
+const rcH = document.getElementById('rcH');
+const rcM = document.getElementById('rcM');
+const rcS = document.getElementById('rcS');
+
+function pad2(n){ return String(n).padStart(2,'0'); }
+function formatWhen(info){
+  const d = info.date;
+  const opts = { weekday:'short', day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' };
+  return `${info.round || ''} · ${info.session || ''} — ${d.toLocaleString(undefined, opts)}`;
+}
+
+if (targetInfo && rcWhen) rcWhen.textContent = formatWhen(targetInfo);
+
+// Тикер
+let timerId = null;
+function tick(){
+  const now = new Date();
+  const diff = (targetInfo.date - now);
+  if (diff <= 0){
+    rcD.textContent = '0'; rcH.textContent = '00'; rcM.textContent = '00'; rcS.textContent = '00';
+    rcWhen.textContent = 'Race is starting!';
+    clearInterval(timerId);
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  rcD.textContent = d;
+  rcH.textContent = pad2(h);
+  rcM.textContent = pad2(m);
+  rcS.textContent = pad2(s);
+}
+tick();
+timerId = setInterval(tick, 1000);
+
+        // ---------- Fan comments ----------
+(function(){
+  const form = document.getElementById('commentForm');
+  const nameInput = document.getElementById('userName');
+  const textInput = document.getElementById('userComment');
+  const list = document.getElementById('commentList');
+
+  if(!form || !list) return;
+
+  // Загружаем сохранённые комментарии
+  let comments = JSON.parse(localStorage.getItem('fanComments') || '[]');
+
+  function saveAndRender(){
+    localStorage.setItem('fanComments', JSON.stringify(comments));
+    renderComments();
+  }
+
+  function renderComments(){
+    list.innerHTML = '';
+    if(!comments.length){
+      list.innerHTML = '<p style="color:#888">No comments yet. Be the first!</p>';
+      return;
+    }
+    comments.forEach(c=>{
+      const item = document.createElement('div');
+      item.className = 'fc-item';
+      item.innerHTML = `
+        <div class="fc-meta">${c.name} · ${c.date}</div>
+        <div class="fc-text">${c.text}</div>
+      `;
+      list.appendChild(item);
+    });
+  }
+
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    const name = nameInput.value.trim() || 'Anonymous';
+    const text = textInput.value.trim();
+    if(!text) return;
+    const date = new Date().toLocaleString();
+    comments.unshift({name, text, date});
+    saveAndRender();
+    form.reset();
+  });
+
+  renderComments();
+})();
+
+    </script>
+
+</body>
+</html>
